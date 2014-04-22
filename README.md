@@ -24,9 +24,11 @@ To locate the directory of your profile, do:
 You can copy this directory into the `extensions` directory of your profile. Once loaded, this extension can be loaded as any other ipython extension
 
 Using the `%load_ext` magic:
+
 ``In [1]: %load_ext base16-mplrc/eighties.dark``
 
 or my modifying your `ipython_notebook_config.py` in your profile directory
+
 ``c.InteractiveShellApp.extensions = [
     'base16-mplrc/eighties.dark'
     ]``
