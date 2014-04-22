@@ -1,6 +1,6 @@
 # Base 16 for IPython Notebook
 
-An ipython extension to load custom matplotlibrcs to accompany Nikhil S's [style sheets][0] for [IPython Notebook][1], using Chris Kempson's [Base16][2] color scheme generator 
+An ipython extension to load custom matplotlibrcs to accompany Nikhil Sonnad's [style sheets][0] for [IPython Notebook][1], using Chris Kempson's [Base16][2] color scheme generator 
 
 ## Screenshots
 
@@ -46,7 +46,7 @@ You can set the default fonts by modifying the base file in base-16, eg:
 ## Credits
 
 * Uses Base16 builder by [Chris Kempson][3]. 
-* Based off of base16-ipython-notebook by [Nikhil S][0]. 
+* Based off of base16-ipython-notebook by [Nikhil Sonnad][0]. 
 
 [0]: https://github.com/nsonnad/base16-ipython-notebook
 [1]: http://ipython.org/notebook.html
