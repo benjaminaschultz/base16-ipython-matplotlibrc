@@ -1,4 +1,4 @@
-# Base 16 for IPython Notebook
+# Base 16 Inline Backend Themes for IPython Notebook
 
 An ipython extension to load custom matplotlibrcs to accompany Nikhil Sonnad's [style sheets][0] for [IPython Notebook][1], using Chris Kempson's [Base16][2] color scheme generator 
 
