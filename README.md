@@ -17,16 +17,14 @@ An ipython extension to load custom matplotlibrcs to accompany Nikhil Sonnad's [
 
 ## Installation
 
-To use these color schemes, you'll install this extension in the extensions folder of your ipython
-profile. If you don't have a custom profile, run:
+To use these color schemes, you'll install this extension in the extensions folder of your ipython. You can find where your ipython directory is, run
+`ipython locate`
 
-`ipython profile create <profile-name>`
+You can copy the contents of this directory into your `extensions` directory in your base ipython directory. Once loaded, this extension can be loaded as any other ipython extension
 
-To locate the directory of your profile, do:
-
-`ipython locate profile <profile-name>`
-
-You can copy the contents of this directory into the `extensions` directory of your profile. Once loaded, this extension can be loaded as any other ipython extension
+```
+cp -r base16* ~/.ipython/extensions/.
+```
 
 Using the `%load_ext` magic:
 
@@ -39,6 +37,15 @@ or by modifying your `ipython_notebook_config.py` in your profile directory
 ``c.InteractiveShellApp.extensions = [
     'base16_mplrc'
      ]``
+
+If you don't have a custom profile, run:
+
+`ipython profile create <profile-name>`
+
+To locate the directory of your profile, do:
+
+`ipython locate profile <profile-name>`
+
 
 once loaded, you can invoke it via line magic
 
