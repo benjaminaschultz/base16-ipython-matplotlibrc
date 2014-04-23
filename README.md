@@ -55,7 +55,7 @@ In [1]: %base16_mplrc <shade> <theme>
 ```
 
 `shade` and `theme` are both optional positional arguments. If both are absent, then this extension
-attempts to find the one matching the base16 theme you have installed in static css.
+attempts to find the one matching the base16 theme you have installed in profile directory's `static/custom/custom.css`.
 
 ```
 Type:       Magic function
