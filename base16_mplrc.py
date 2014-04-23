@@ -1,3 +1,23 @@
+'''
+This will theme the inline backend of maptlotlib using base16 fonts
+
+It integrates with Nikhil Sonnad's base16-ipython-notebook themes,
+available here:  https://github.com/nsonnad/base16-ipython-notebook
+
+Invoke this via inline magic
+
+`%base16_mplrc`
+
+will try to determine the base16 theme if you have used one of Nikhil's
+
+otherwisr
+
+`%base16_mplrc <shade> <theme>`
+
+will load the theme <theme> in <shade>. e.g.,
+
+`%base16_mplrc dark solarized`
+'''
 #-------------------------------------------------------
 # This extension defines a magic that will configure
 # InlineBackend.rc to match the active base16 custom.css
@@ -29,7 +49,6 @@ class MPLRCMagics(Magics):
     @argument('shade', nargs='?', default = None,help='shade of theme, light or dark')
     @argument('theme', nargs='?', default=None, help='base16 theme')
     def base16_mplrc(self,args):
-        print("line: "+ args)
         #parse the magick arguments
         args = parse_argstring(self.base16_mplrc,args)
         shade = args.shade
@@ -69,6 +88,9 @@ class MPLRCMagics(Magics):
             shade = 'light'
         if theme not in [os.path.split(f)[-1].split('.')[0] for f in glob.glob('base16-mplrc-themes/*.json')]:
             print("theme must be present in base16-mplrc-themes dir, defaulting to 'default'")
+            print("Available themes:")
+            for t in [os.path.split(f)[-1].split('.')[0] for f in glob.glob('base16-mplrc-themes/*.json')]:
+                print("\t{}".format(t))
             theme = 'default'
 
         print("Setting plotting theme to {}-{}".format(theme,shade))
