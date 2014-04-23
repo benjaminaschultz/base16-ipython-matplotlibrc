@@ -20,11 +20,13 @@ An ipython extension to load custom matplotlibrcs to accompany Nikhil Sonnad's [
 To use these color schemes, you'll install this extension in the extensions folder of your ipython. You can find where your ipython directory is, run
 `ipython locate`
 
-You can copy the contents of this directory into your `extensions` directory in your base ipython directory. Once loaded, this extension can be loaded as any other ipython extension
+You can copy the contents of this directory into your `extensions` directory in your base ipython directory.
 
 ```
 cp -r base16* ~/.ipython/extensions/.
 ```
+
+Once installed, this extension can be loaded as any other ipython extension
 
 Using the `%load_ext` magic:
 
@@ -32,7 +34,7 @@ Using the `%load_ext` magic:
 In [1]: %load_ext base16_mplrc
 ```
 
-or by modifying your `ipython_notebook_config.py` in your profile directory
+or by modifying  `ipython_notebook_config.py` in your profile directory
 
 ``c.InteractiveShellApp.extensions = [
     'base16_mplrc'
