@@ -123,7 +123,7 @@ class MPLRCMagics(Magics):
                       'text.color':theme_colors['base00'],
                       'axes.color_cycle':[theme_colors['base{:02X}'.format(i)] for i in range(15,8,-1)],
                       'axes.facecolor': theme_colors['base07'],
-                      'axes.edgecolor': theme_colors['base06'],
+                      'axes.edgecolor': theme_colors['base00'],
                       'axes.labelcolor': theme_colors['base00'],
                       'lines.color': theme_colors['base0D'],
                       'lines.markeredgewidth': 0,
