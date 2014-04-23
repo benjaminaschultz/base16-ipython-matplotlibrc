@@ -19,7 +19,6 @@ from IPython.core.magic import Magics, magics_class, line_magic
 from IPython.utils.warn import error
 from IPython.core.magic_arguments import (argument, magic_arguments, parse_argstring)
 
-
 @magics_class
 class MPLRCMagics(Magics):
     def __init__(self,shell):
@@ -94,8 +93,7 @@ class MPLRCMagics(Magics):
                         'patch.edgecolor': theme_colors['base02'],
                         'xtick.color': theme_colors['base07'],
                         'ytick.color': theme_colors['base07'],
-                        'grid.color': theme_colors['base02'],
-                        'font.family': 'Inconsolata'}
+                        'grid.color': theme_colors['base02']}
         elif shade=="light":
             cfg.rc = {'figure.facecolor':theme_colors['base07'],
                       'savefig.facecolor':theme_colors['base07'],
@@ -110,8 +108,7 @@ class MPLRCMagics(Magics):
                       'patch.edgecolor': theme_colors['base02'],
                       'xtick.color': theme_colors['base00'],
                       'ytick.color': theme_colors['base00'],
-                      'grid.color': theme_colors['base06'],
-                      'font.family': 'Inconsolata'}
+                      'grid.color': theme_colors['base06']}
         #If pyplot is already using the InlineBackend, this will force an update to the rcParams
         from matplotlib import pyplot
         if pyplot.rcParams['backend'] == 'module://IPython.kernel.zmq.pylab.backend_inline':
