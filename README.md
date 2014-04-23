@@ -17,7 +17,7 @@ An ipython extension to load custom matplotlibrcs to accompany Nikhil Sonnad's [
 
 ## Installation
 
-To use these styles, you'll install this extension in the extensions folder of your ipython
+To use these color schemes, you'll install this extension in the extensions folder of your ipython
 profile. If you don't have a custom profile, run:
 
 `ipython profile create <profile-name>`
@@ -65,6 +65,9 @@ Docstring:
     shade  shade of theme, light or dark
     theme  base16 theme
 ```
+
+
+This extension will only modify the colors of your matplotlibrc for the use in the ipython notebooks; it will respect any other settings in your default matplotlibrc
 
 ## Custom fonts
 You can set the default fonts by modifying your `ipython_notebook_config.py`:
