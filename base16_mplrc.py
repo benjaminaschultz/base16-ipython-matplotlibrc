@@ -62,8 +62,8 @@ class MPLRCMagics(Magics):
             with open(custom_css_fname) as css_file:
                 for line in css_file:
                     if(re.match('^\s*Name: ',line)):
-                         css_theme = line.split()[2].lower()
-                         css_shade = line.split()[-1].lower()
+                        css_theme = line.split()[2].lower()
+                        css_shade = line.split()[-1].lower()
 
         #fall back on sensible defaults
         if theme is None:
@@ -82,19 +82,20 @@ class MPLRCMagics(Magics):
                      from https://github.com/nsonnad/base16-ipython-notebook . Using \'default\' theme.''')
             shade = 'light'
 
+        avail_themes = [os.path.split(f)[-1].split('.')[0] for f in glob.glob(self.shell.ipython_dir+'/extensions/base16-mplrc-themes/*.json')]
         #validate input
         if shade not in ['dark','light']:
             print("shade must be either dark or light, defaulting to light")
             shade = 'light'
-        if theme not in [os.path.split(f)[-1].split('.')[0] for f in glob.glob('base16-mplrc-themes/*.json')]:
+        if theme not in avail_themes:
             print("theme must be present in base16-mplrc-themes dir, defaulting to 'default'")
             print("Available themes:")
-            for t in [os.path.split(f)[-1].split('.')[0] for f in glob.glob('base16-mplrc-themes/*.json')]:
+            for t in avail_themes:
                 print("\t{}".format(t))
             theme = 'default'
 
         print("Setting plotting theme to {}-{}".format(theme,shade))
-        theme_colors = json.load(open('base16-mplrc-themes/'+theme+'.json'))
+        theme_colors = json.load(open(self.shell.ipython_dir+'/extensions/base16-mplrc-themes/'+theme+'.json'))
         #snag the matplotlibrc configuration from the ipython config
         from IPython.kernel.zmq.pylab.backend_inline import InlineBackend
         cfg = InlineBackend.instance(parent=self.shell)
