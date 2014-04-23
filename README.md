@@ -4,10 +4,20 @@ An ipython extension to load custom matplotlibrcs to accompany Nikhil Sonnad's [
 
 ## Screenshots
 
-####Ocean dark
+####Ocean dark with Ocean Dark notebook
+![odod](odod.png)
+####Ocean dark with Ocean Light notebook
+![odol](odol.png)
 
 
-####Solarized light
+####Solarized dark with Solarized Dark notebook
+![sdsd](sdsd.png)
+
+####Solarized dark with Solarized Dark notebook
+![sdsl](sdsl.png)
+
+####Solarized light with Default light notebook
+![sddl](sddl.png)
 
 
 ## Installation
@@ -21,28 +31,52 @@ To locate the directory of your profile, do:
 
 `ipython locate profile <profile-name>`
 
-You can copy this directory into the `extensions` directory of your profile. Once loaded, this extension can be loaded as any other ipython extension
+You can copy the contents of this directory into the `extensions` directory of your profile. Once loaded, this extension can be loaded as any other ipython extension
 
 Using the `%load_ext` magic:
 
-``In [1]: %load_ext base16-mplrc/eighties.dark``
+```
+In [1]: %load_ext base16_mplrc
+```
 
-or my modifying your `ipython_notebook_config.py` in your profile directory
+or by modifying your `ipython_notebook_config.py` in your profile directory
 
 ``c.InteractiveShellApp.extensions = [
-    'base16-mplrc/eighties.dark'
-    ]``
+    'base16_mplrc'
+     ]``
+
+once loaded, you can invoke it via line magic
+
+```
+In [1]: %base16_mplrc <shade> <theme>
+        %pylab inline
+```
+
+`shade` and `theme` are both optional positional arguments. If both are absent, then this extension
+attempts to find the one matching the base16 theme you have installed in static css.
+
+```
+Type:       Magic function
+String Form:<bound method MPLRCMagics.base16_mplrc of <base16_mplrc_dark.MPLRCMagics object at 0x2a17050>>
+Namespace:  IPython internal
+File:       /home/benjib0t/.ipython/extensions/base16_mplrc_dark.py
+Definition: %base16_mplrc(self, args)
+Docstring:
+::
+
+  %base16_mplrc [shade] [theme]
+
+  positional arguments:
+    shade  shade of theme, light or dark
+    theme  base16 theme
+```
 
 ## Custom fonts
-You can set the default fonts by modifying the base file in base-16, eg:
+You can set the default fonts by modifying your `ipython_notebook_config.py`:
 
 ```
-{
-  font-family: 'Inconsolata', monospace !important;
-  font-size: 16px;
-}
+c.InlineBackend.rc = {'font.family':'Inconsolata'}
 ```
-
 ## Credits
 
 * Uses Base16 builder by [Chris Kempson][3]. 
@@ -54,4 +88,3 @@ You can set the default fonts by modifying the base file in base-16, eg:
 [3]: https://github.com/chriskempson
 [4]: https://github.com/idleberg/base16-codemirror
 [5]: https://github.com/idleberg
-
