@@ -206,8 +206,9 @@ class MPLRCMagics(Magics):
             b16_colors.reds = ListedColormap(make_gradient(cols),name='b16_reds')
             cm.register_cmap('b16_reds',b16_colors.reds)
 
-            #Make a "reds" colormap
-            cols = [b16_colors.k,b16_colors.y,b16_colors.o,b16_colors.r]
+            #Make a "flame" colormap
+            cols = [conv.to_rgb(theme_colors['base{:02X}'.format(i)]) for i in range(0,3,2)]+\
+                   [b16_colors.y,b16_colors.o,b16_colors.r]
             b16_colors.flame = ListedColormap(make_gradient(cols),name='b16_flame')
             cm.register_cmap('b16_flame',b16_colors.flame)
 
