@@ -81,7 +81,8 @@ Docstring:
 This extension will only modify the colors of your matplotlibrc for the use in the ipython notebooks; it will respect any other settings in your default matplotlibrc
 
 It also pushes an object `b16_colors` to your shell, which contains colors and colormaps.
-'''
+
+```
 #colors
 b16_colors.r = b16_colors.red
 b16_colors.o = b16_colors.orange
@@ -103,7 +104,7 @@ b16_colors.reds registered as 'b16_reds'
 b16_colors.oranges registered as 'b16_oranges'
 b16_colors.flame registered as 'b16_flame'
 b16_colors.brbg registered as 'b16_brbg'
-'''
+```
 
 ## Custom fonts
 You can set the default fonts by modifying your `ipython_notebook_config.py`:
