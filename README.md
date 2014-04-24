@@ -4,11 +4,13 @@ An ipython extension to load custom matplotlibrcs to accompany Nikhil Sonnad's [
 
 ## Screenshots
 
-####Solarized Dark with Solarized Dark notebook
-![sdsd](sdsd.png)
+####Eighties Dark with Eighties Dark notebook
+![sdsd](eighties_dark.png)
+![sdsd](eighties_dark_cmaps.png)
 
-####Solarized Light with Solarized Light notebook
-![sdsd](slsl.png)
+####Solarized Dark with Solarized Dark notebook
+![sdsd](solarized_dark.png)
+![sdsd](solarized_dark_cmaps.png)
 
 ####Default Light  with Solarized Dark notebook
 ![sddl](sddl.png)
