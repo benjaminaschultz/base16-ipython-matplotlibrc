@@ -65,7 +65,7 @@ attempts to find the one matching the base16 theme you have installed in profile
 Type:       Magic function
 String Form:<bound method MPLRCMagics.base16_mplrc of <base16_mplrc_dark.MPLRCMagics object at 0x2a17050>>
 Namespace:  IPython internal
-File:       /home/benjib0t/.ipython/extensions/base16_mplrc_dark.py
+File:       /home/benjib0t/.ipython/extensions/base16_mplrc.py
 Definition: %base16_mplrc(self, args)
 Docstring:
 ::
@@ -79,6 +79,31 @@ Docstring:
 
 
 This extension will only modify the colors of your matplotlibrc for the use in the ipython notebooks; it will respect any other settings in your default matplotlibrc
+
+It also pushes an object `b16_colors` to your shell, which contains colors and colormaps.
+'''
+#colors
+b16_colors.r = b16_colors.red
+b16_colors.o = b16_colors.orange
+b16_colors.y = b16_colors.yellow
+b16_colors.g = b16_colors.green
+b16_colors.c = b16_colors.cyan
+b16_colors.b = b16_colors.blue
+b16_colors.m = b16_colors.magenta
+b16_colors.n = b16_colors.brown
+b16_colors.w = b16_colors.white
+b16_colors.k = b16_colors.black
+
+#colormaps
+b16_colors.jet registered as 'b16_jet'
+b16_colors.gray registered as 'b16_gray'
+b16_colors.blues registered as 'b16_blues'
+b16_colors.greens registered as 'b16_greens'
+b16_colors.reds registered as 'b16_reds'
+b16_colors.oranges registered as 'b16_oranges'
+b16_colors.flame registered as 'b16_flame'
+b16_colors.brbg registered as 'b16_brbg'
+'''
 
 ## Custom fonts
 You can set the default fonts by modifying your `ipython_notebook_config.py`:
