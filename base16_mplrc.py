@@ -94,8 +94,10 @@ class MPLRCMagics(Magics):
                 print("\t{}".format(t))
             theme = 'default'
 
-        print("Setting plotting theme to {}-{}. Pallete available in b16_colors".format(theme,shade))
+        print("Setting plotting theme to {}-{}. Palette available in b16_colors".format(theme,shade))
+
         theme_colors = json.load(open(self.shell.ipython_dir+'/extensions/base16-mplrc-themes/'+theme+'.json'))
+
         #snag the matplotlibrc configuration from the ipython config
         from IPython.kernel.zmq.pylab.backend_inline import InlineBackend
         cfg = InlineBackend.instance(parent=self.shell)
@@ -133,9 +135,13 @@ class MPLRCMagics(Magics):
                       'ytick.color': theme_colors['base00'],
                       'grid.color': theme_colors['base06']}
         #If pyplot is already using the InlineBackend, this will force an update to the rcParams
-        from matplotlib import pyplot
+
+        from matplotlib import pyplot, cm
+        from matplotlib.colors import ColorConverter, ListedColormap
+        import numpy as np
+
+        conv = ColorConverter()
         if pyplot.rcParams['backend'] == 'module://IPython.kernel.zmq.pylab.backend_inline':
-            pyplot.rcParams.update(cfg.rc)
 
             #push the color pallete into scope for the user
             full=['red','orange','yellow','green','cyan','blue','magenta','brown']
@@ -144,14 +150,76 @@ class MPLRCMagics(Magics):
             class Palette(object): pass
             b16_colors=Palette()
             for f,a,i in zip(full,abbr,range(8,16)):
-                setattr(b16_colors,f,theme_colors['base{:02X}'.format(i)])
-                setattr(b16_colors,a,theme_colors['base{:02X}'.format(i)])
+                setattr(b16_colors,f,conv.to_rgb(theme_colors['base{:02X}'.format(i)]))
+                setattr(b16_colors,a,conv.to_rgb(theme_colors['base{:02X}'.format(i)]))
 
-            setattr(b16_colors,'white',theme_colors['base07'])
-            setattr(b16_colors,'w',theme_colors['base07'])
-            setattr(b16_colors,'black',theme_colors['base00'])
-            setattr(b16_colors,'k',theme_colors['base00'])
+            setattr(b16_colors,'white',conv.to_rgb(theme_colors['base07']))
+            setattr(b16_colors,'w',conv.to_rgb(theme_colors['base07']))
+            setattr(b16_colors,'black',conv.to_rgb(theme_colors['base00']))
+            setattr(b16_colors,'k',conv.to_rgb(theme_colors['base00']))
+
+            #----------------- Color maps ---------------------#
+            def make_gradient(cols):
+                N=255
+                M=int(np.ceil(N/len(cols)))
+                reds = np.empty((0),dtype=np.float)
+                blues = np.empty((0),dtype=np.float)
+                greens = np.empty((0),dtype=np.float)
+                for c0,c1 in zip(cols[:-1],cols[1:]):
+                    reds = np.concatenate((reds,np.linspace(c0[0],c1[0],M-1)))
+                    greens = np.concatenate((greens,np.linspace(c0[1],c1[1],M-1)))
+                    blues = np.concatenate((blues,np.linspace(c0[2],c1[2],M-1)))
+                return np.array((reds,greens,blues)).transpose()
+
+            #Make a "jet" colormap
+            cols =[b16_colors.b,
+                   b16_colors.c,
+                   b16_colors.g,
+                   b16_colors.y,
+                   b16_colors.o,
+                   b16_colors.r]
+            b16_colors.jet = ListedColormap(make_gradient(cols),name='b16_jet')
+            cm.register_cmap('b16_jet',b16_colors.jet)
+
+            #Make a "grayscale" colormap
+            cols = [conv.to_rgb(theme_colors['base{:02X}'.format(i)]) for i in range(8)]
+            b16_colors.gray = ListedColormap(make_gradient(cols),name='b16_gray')
+            cm.register_cmap('b16_gray',b16_colors.gray)
+
+            #Make a "blues" colormap
+            cols = [b16_colors.w,b16_colors.c,b16_colors.b]
+            b16_colors.blues = ListedColormap(make_gradient(cols),name='b16_blues')
+            cm.register_cmap('b16_blues',b16_colors.blues)
+
+            #Make a "greens" colormap
+            cols = [b16_colors.w,b16_colors.c,b16_colors.g]
+            b16_colors.greens = ListedColormap(make_gradient(cols),name='b16_greens')
+            cm.register_cmap('b16_greens',b16_colors.greens)
+
+            #Make a "oranges" colormap
+            cols = [b16_colors.w,b16_colors.y,b16_colors.o]
+            b16_colors.oranges = ListedColormap(make_gradient(cols),name='b16_oranges')
+            cm.register_cmap('b16_oranges',b16_colors.oranges)
+
+            #Make a "reds" colormap
+            cols = [b16_colors.w,b16_colors.y,b16_colors.o,b16_colors.r]
+            b16_colors.reds = ListedColormap(make_gradient(cols),name='b16_reds')
+            cm.register_cmap('b16_reds',b16_colors.reds)
+
+            #Make a "reds" colormap
+            cols = [b16_colors.k,b16_colors.y,b16_colors.o,b16_colors.r]
+            b16_colors.flame = ListedColormap(make_gradient(cols),name='b16_flame')
+            cm.register_cmap('b16_flame',b16_colors.flame)
+
+            #Make a "brbg" colormap
+            cols = [b16_colors.n,b16_colors.w,b16_colors.b,b16_colors.g]
+            b16_colors.brbg = ListedColormap(make_gradient(cols),name='b16_brbg')
+            cm.register_cmap('b16_brbg',b16_colors.brbg)
+
             self.shell.push({"b16_colors":b16_colors})
+            cfg.rc.update({'image.cmap':'b16_flame'})
+
+            pyplot.rcParams.update(cfg.rc)
 
 def load_ipython_extension(ipython):
     ipython.register_magics(MPLRCMagics)
