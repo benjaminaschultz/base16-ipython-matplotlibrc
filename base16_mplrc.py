@@ -41,7 +41,7 @@ from IPython.core.magic_arguments import (argument, magic_arguments, parse_argst
 
 @magics_class
 class MPLRCMagics(Magics):
-    def __init__(self,shell):
+    def __init__(self,shell): 
         super(MPLRCMagics,self).__init__(shell)
 
     @line_magic
@@ -94,7 +94,7 @@ class MPLRCMagics(Magics):
                 print("\t{}".format(t))
             theme = 'default'
 
-        print("Setting plotting theme to {}-{}".format(theme,shade))
+        print("Setting plotting theme to {}-{}. Pallete available in b16_colors".format(theme,shade))
         theme_colors = json.load(open(self.shell.ipython_dir+'/extensions/base16-mplrc-themes/'+theme+'.json'))
         #snag the matplotlibrc configuration from the ipython config
         from IPython.kernel.zmq.pylab.backend_inline import InlineBackend
@@ -136,6 +136,22 @@ class MPLRCMagics(Magics):
         from matplotlib import pyplot
         if pyplot.rcParams['backend'] == 'module://IPython.kernel.zmq.pylab.backend_inline':
             pyplot.rcParams.update(cfg.rc)
+
+            #push the color pallete into scope for the user
+            full=['red','orange','yellow','green','cyan','blue','magenta','brown']
+            abbr=['r','o','y','g','c','b','m','n']
+            #create a color palette class
+            class Palette(object): pass
+            b16_colors=Palette()
+            for f,a,i in zip(full,abbr,range(8,16)):
+                setattr(b16_colors,f,theme_colors['base{:02X}'.format(i)])
+                setattr(b16_colors,a,theme_colors['base{:02X}'.format(i)])
+
+            setattr(b16_colors,'white',theme_colors['base07'])
+            setattr(b16_colors,'w',theme_colors['base07'])
+            setattr(b16_colors,'black',theme_colors['base00'])
+            setattr(b16_colors,'k',theme_colors['base00'])
+            self.shell.push({"b16_colors":b16_colors})
 
 def load_ipython_extension(ipython):
     ipython.register_magics(MPLRCMagics)
