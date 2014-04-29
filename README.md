@@ -2,6 +2,8 @@
 
 An ipython extension to load custom matplotlibrcs to accompany Nikhil Sonnad's [style sheets][0] for [IPython Notebook][1], using Chris Kempson's [Base16][2] color scheme generator 
 
+*There is a bug in ipython2.0 that results in the figure backgrounds always being white, I'm tracking this down*
+
 ## Screenshots
 
 ####Eighties Dark with Eighties Dark notebook
